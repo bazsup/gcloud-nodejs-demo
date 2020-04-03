@@ -9,7 +9,6 @@ steps:
     args: ["build", "-t", "gcr.io/$PROJECT_ID/gcloud-nodejs-demo", "."]
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "--image-url=gcr.io/$PROJECT_ID/gcloud-nodejs-demo"]
-    timeout: "1600s"
 
 images:
   - "gcr.io/$PROJECT_ID/gcloud-nodejs-demo"
