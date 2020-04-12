@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 app.get("/", (req, res) => {
-  res.send("Hello, Infra. Use cloudbuild.yaml.");
+  res.send("Hello, Infra. I want to go outside.");
 });
 
 const port = process.env.PORT || 8080;
