@@ -2,3 +2,5 @@ steps:
   - name: node:12.16.1
     entrypoint: yarn
     args: ["install"]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
