@@ -5,5 +5,16 @@ steps:
   - name: node:12.16.1
     entrypoint: yarn
     args: ["test"]
+  # deploy for pre-production test
   - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy"]
+    args: ["app", "deploy", "--no-promote", "--version=$BUILD_ID"]
+  - name: "echo"
+    args: ["APP_URL=https://${BUILD_ID}-dot-${PROJECT_ID}.appspot.com"]
+  # run performance tests
+  - name: "loadimpact/k6"
+    args: ["run", "loadtests/performance-test.js"]
+    env:
+    - "APP_URL=https://${BUILD_ID}-dot-${PROJECT_ID}.appspot.com"
+  # move traffic to latest version
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "services", "set-traffic", "default", "--splits", "${BUILD_ID}=1"]
