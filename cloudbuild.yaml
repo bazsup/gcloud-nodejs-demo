@@ -8,8 +8,8 @@ steps:
   # deploy for pre-production test
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy", "--no-promote", "--version=$BUILD_ID"]
-  - name: "echo"
-    args: ["APP_URL=https://${BUILD_ID}-dot-${PROJECT_ID}.appspot.com"]
+  - name: "ubuntu"
+    args: ["echo", "APP_URL=https://${BUILD_ID}-dot-${PROJECT_ID}.appspot.com"]
   # run performance tests
   - name: "loadimpact/k6"
     args: ["run", "loadtests/performance-test.js"]
