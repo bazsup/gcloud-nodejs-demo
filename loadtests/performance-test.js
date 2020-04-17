@@ -2,9 +2,6 @@ import http from 'k6/http'
 import { sleep } from 'k6'
 import { Rate } from 'k6/metrics';
 
-console.log('environments: ', __ENV)
-console.log('------- APP_URL', __ENV.APP_URL)
-
 const myFailRate = new Rate('failed requests');
 
 export let options = {
@@ -16,7 +13,7 @@ export let options = {
     'failed requests': ['rate<0.1'],
     // threshold on a standard metric
     // - 95th percentile response time must be below 1s.
-    'http_req_duration': ['p(95)<500'] 
+    'http_req_duration': ['p(95)<2000'] 
   }
 }
 
